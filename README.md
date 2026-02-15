@@ -17,11 +17,14 @@ Stable Diffusion은 하나의 독립적인 실체가 아니라, 크게는 두가
 우선 Text Understander로 사용자가 입력한 prompt를 이해해야 하며,
 그를 바탕으로 Image Generator가 작동하여 그에 맞는 이미지를 출력한다.
 
-![스크린샷 2026-02-01 오후 9.33.20.png](attachment:23b4ba12-c6cd-4b22-b76c-3e9b0cc1cd65:스크린샷_2026-02-01_오후_9.33.20.png)
+
+<img width="1862" height="746" alt="image" src="https://github.com/user-attachments/assets/109d30c8-8567-4a97-9c97-e0a04643c412" />
+
 
 Image Generator는 또 두 부분으로 나뉜다.
 
-![스크린샷 2026-02-01 오후 9.36.30.png](attachment:c14caf94-ff0b-4154-b6e6-ec68d034023f:스크린샷_2026-02-01_오후_9.36.30.png)
+<img width="1788" height="668" alt="image" src="https://github.com/user-attachments/assets/f8b419a3-b459-472e-90be-50da43c1bf39" />
+
 
 따라서 총 3가지 component 각각을 살펴보겠다.
 
@@ -68,7 +71,8 @@ Diffusion model의 핵심 네트워크.
 
 “샘플링 루프에서 latent를 어떻게 업데이트할지” 정해주는 **스케줄러**.
 
-![스크린샷 2026-02-04 오후 8.54.29.png](attachment:c733d07c-8270-4ca2-b21d-65b3ef265984:스크린샷_2026-02-04_오후_8.54.29.png)
+<img width="1874" height="1002" alt="image" src="https://github.com/user-attachments/assets/6986c015-7570-4ed3-8eb0-f2b662ea3247" />
+
 
 Diffusion은 Image Informaton Creator 안에서 일어나는 과정이다.
 
@@ -80,17 +84,18 @@ Random image information tensor에서 시작해서, 여러 스텝을 거쳐가�
 
 Diffusion은 항상 랜덤한 noise를 더해준다.
 
-![스크린샷 2026-02-04 오후 9.37.18.png](attachment:7050046f-fbe4-417f-809e-9308f9db1cbe:스크린샷_2026-02-04_오후_9.37.18.png)
+<img width="1182" height="636" alt="image" src="https://github.com/user-attachments/assets/43e78bd0-0df6-499f-bf45-015c40977143" />
+
 
 Image 하나를 고른 뒤, random noise를 생성하고, 이만큼 image에 추가하여 dataset을 구축한다.
 
-![스크린샷 2026-02-04 오후 9.38.08.png](attachment:446153c2-ada2-4828-9bb1-f00f3520c46e:스크린샷_2026-02-04_오후_9.38.08.png)
+<img width="1182" height="656" alt="image" src="https://github.com/user-attachments/assets/7a70d4d6-6509-49a3-a049-742c03b57202" />
 
 노이즈가 섞인 이미지들이 들어있는 training dataset을 Unet에 넣고,
 Unet이 어떤 노이즈가 포함되어있는지를 예측해서 Unet Prediction을 내놓으면,
 Actual noise와 얼마나 차이가 나는지 Loss Fuction으로 계산하여 그만큼 차이를 보정한다.
 
-![스크린샷 2026-02-04 오후 9.46.47.png](attachment:ac1cdb96-d597-47f8-880c-78da2c1ff805:스크린샷_2026-02-04_오후_9.46.47.png)
+<img width="1182" height="656" alt="image" src="https://github.com/user-attachments/assets/c2d83962-cea2-4385-b615-5a95f7569d98" />
 
 이제 step을 계속 거치며, 예측된 noise만큼을 이미지에서 빼면서 원본 이미지를 차근차근히
 예측해 나간다. 
@@ -102,4 +107,5 @@ Actual noise와 얼마나 차이가 나는지 Loss Fuction으로 계산하여 �
 
 지금부터는 Compressed Data, 즉 압축된 이미지를 바탕으로 Diffusion을 진행할 것이다.
 
-![스크린샷 2026-02-04 오후 9.52.59.png](attachment:34e83283-0dac-4e0c-812d-c9247f1b11c4:스크린샷_2026-02-04_오후_9.52.59.png)
+<img width="1182" height="662" alt="image" src="https://github.com/user-attachments/assets/12a5148b-3c2b-415b-ae48-180dbb1fed2b" />
+
