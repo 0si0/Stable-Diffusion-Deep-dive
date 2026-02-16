@@ -12,7 +12,9 @@ image = pipe("An astronaut scuba Diving").images[0]
 
 
 
-Stable Diffusion은 하나의 독립적인 실체가 아니라, 크게는 두가지 component로 이루어졌다고 볼 수 있다.
+Stable Diffusion은 일반적인 DIffusion 모델과 다른 특징들이 여럿 있다.
+
+Stable Diffusion은 크게 2가지의 핵심 component로 구성되어 있다. 
 
 우선 Text Understander로 사용자가 입력한 prompt를 이해해야 하며,
 그를 바탕으로 Image Generator가 작동하여 그에 맞는 이미지를 출력한다.
@@ -71,14 +73,15 @@ Diffusion model의 핵심 네트워크.
 
 “샘플링 루프에서 latent를 어떻게 업데이트할지” 정해주는 **스케줄러**.
 
-<img width="1874" height="1002" alt="image" src="https://github.com/user-attachments/assets/6986c015-7570-4ed3-8eb0-f2b662ea3247" />
+### Classifier Free Guidance
 
+prompt를 아무리 입력해도, 모델이 여전히 prompt보다 default noisy input image에 의존하여 이미지를 생성할 수도 있다. 따라서 이럴 때 더 prompt에 가깝게 하기 위해서 CFG를 활용한다.
 
-Diffusion은 Image Informaton Creator 안에서 일어나는 과정이다.
+CFG는 prompt를 사용하여 만든 이미지인 conditional sampling과,
+prompt 없이 만든 이미지인 unconditional sampling을 각각 만들어서,
+두개의 오차만큼 더 학습시켜서 conditional sampling에 더 가깝도록 이미지를 생성할 수 있게
+조정하는 방법이다.
 
-Text Encoder가 출력해낸 Token embeddings를 input으로 받고, 
-Random image information tensor에서 시작해서, 여러 스텝을 거쳐가며 
-사용자가 원하는 image information tensor를 제작해 나간다.
 
 ### How diffusion works
 
@@ -108,4 +111,7 @@ Actual noise와 얼마나 차이가 나는지 Loss Fuction으로 계산하여 �
 지금부터는 Compressed Data, 즉 압축된 이미지를 바탕으로 Diffusion을 진행할 것이다.
 
 <img width="1182" height="662" alt="image" src="https://github.com/user-attachments/assets/12a5148b-3c2b-415b-ae48-180dbb1fed2b" />
+
+
+
 
